@@ -15,8 +15,11 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "ignoreDeprecations": "6.0"
+    "ignoreDeprecations": "6.0",
+    "paths": {
+      "react": ["./node_modules/@types/react"]
+    }
   },
-  "include": ["src", "train.ts"]
+  "include": ["src"]
 }
 
