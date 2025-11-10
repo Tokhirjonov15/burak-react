@@ -1,3 +1,3 @@
 export function OtherNavbar () {
-    return <div>OtherNavbar</div>
+    return <div>Other Navbar</div>
 }
