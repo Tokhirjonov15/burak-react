@@ -32,6 +32,7 @@ export default function HomePage() {
 
   useEffect(() => {
     // Backend server data request => Data
+    
     // Slice: Data => Store
   }, []);
 

@@ -17,3 +17,16 @@ export const retrieveTopUsers = createSelector(
     selectHomePage, 
     (HomePage) => HomePage.topUsers
 );
+
+/**
+const selectHomePage = (state: AppRootState) => state.homePage;
+export const retrievePopularDishes = createSelector(
+    selectHomePage, 
+    (HomePage) => {
+       return {
+         popularDishes: homePage.popularDishes,
+         newDishes: homePage.newDishes,
+         topUsers: homePage.topusers,
+       };
+    });
+ */
