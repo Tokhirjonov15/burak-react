@@ -274,7 +274,6 @@ export default function Products(props: ProductsProps) {
                                                   src={"/icons/shopping-cart.svg"}
                                                   style={{ display: "flex"}}
                                                   onClick={(e) => {
-                                                    console.log("BUTTON PRESSED");
                                                     onAdd({
                                                       _id: product._id,
                                                       quantity: 1,
