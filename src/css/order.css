@@ -60,7 +60,7 @@
 /* Order Cards - Left Side */
 .order-page .order-main-box {
   width: 821px;
-  height: 260px;
+  height: auto;
   margin-top: 25px;
   margin-bottom: 32px;
   border-radius: 16px;
@@ -74,7 +74,7 @@
 }
 
 .order-page .order-box-scroll {
-  flex: 1;             
+  max-height: 190px;           
   overflow-y: auto;   
 }
 
