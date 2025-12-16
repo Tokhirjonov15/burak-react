@@ -16,6 +16,9 @@ import { OrderStatus } from "../../../lib/enums/order.enum";
 import OrderService from "../../services/OrderService";
 import { useGlobals } from "../../hooks/useGlobals";
 import "../../../css/order.css";
+import { useHistory } from "react-router-dom";
+import { serverApi } from "../../../lib/config";
+import { MemberType } from "../../../lib/enums/member.enum";
 
 /** REDUX SLICE & SELECTOR */
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -27,7 +30,8 @@ const actionDispatch = (dispatch: Dispatch) => ({
 export default function OrdersPage() {
   const { setPausedOrders, setProcessOrders, setFinishedOrders } = 
     actionDispatch(useDispatch());
-  const { orderBuilder } = useGlobals();
+  const { orderBuilder, authMember } = useGlobals();
+  const history = useHistory();
   const [value, setValue] = useState("1");
   const [orderInquiry, setOrderInquiry] = useState<OrderInquiry>({
     page: 1,
@@ -59,6 +63,7 @@ export default function OrdersPage() {
     setValue(newValue);
   };
 
+   if (!authMember) history.push("/");
   return (
     <div className={"order-page"}>
       <Container className="order-container">
@@ -87,49 +92,58 @@ export default function OrdersPage() {
         </Stack>
 
         <Stack className={"order-right"}>
-           <Stack
-        className="order-info-box">
-        <Stack
-          className="member-box"
-          alignItems="center"
-          textAlign="center"
-        >
-          <Box className="order-user-img">
-            <Avatar
-              src="/img/justin.webp"
-              className="order-user-avatar"
-            />
-            <Avatar
-              src="/icons/user-badge"
-              className="order-user-badge"
-            />
-          </Box>
+           <Stack className="order-info-box">
+              <Stack
+                className="member-box"
+                alignItems="center"
+                textAlign="center"
+              >
+              <Box className="order-user-img">
+                <Avatar
+                  src={
+                    authMember?.memberImage
+                        ? `${serverApi}/${authMember.memberImage}`
+                        : "/icons/default-user.svg"
+                  }
+                  className="order-user-avatar"
+                />
+                <Avatar
+                  src={
+                    authMember?.memberType === MemberType.RESTAURANT 
+                        ? "/icons/restaurant.svg" 
+                        : "/icons/user-badge.svg"
+                  }
+                  className="order-user-badge"
+                />
+              </Box>
 
-          <Typography className="order-user-name">
-            Alex
-          </Typography>
-
-          <Typography className="order-user-prof">
-            USER
-          </Typography>
-
-          <Stack className="member-location">
-            <Stack
-              direction="row"
-              alignItems="center"
-              className="member-location-info"
-            >
-              <LocationOnIcon />
-              <Typography >
-                Seoul, South Korea
+              <Typography className="order-user-name">
+                {" "}
+                {authMember?.memberNick}
               </Typography>
+              <Typography className="order-user-prof">
+                {" "}
+                {authMember?.memberType}
+              </Typography>
+
+              <Stack className="member-location">
+                <Stack
+                  direction="row"
+                  alignItems="center"
+                  className="member-location-info"
+                >
+                <LocationOnIcon />
+                <Typography >
+                  {authMember?.memberAddress 
+                    ? authMember.memberAddress 
+                    : "do not exist"}
+                </Typography>
+              </Stack>
             </Stack>
           </Stack>
         </Stack>
-      </Stack>
 
-      <Stack
-        className="order-payment-info-box">
+      <Stack className="order-payment-info-box">
         <Box
           className="payment-card-number" >
           Card number: **** 5678 9000 1234
