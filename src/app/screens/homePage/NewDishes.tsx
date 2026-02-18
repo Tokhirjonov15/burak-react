@@ -54,7 +54,7 @@ export default function NewDishes () {
 
                             <CardOverflow variant="soft" className="product-detail">
                                 <Stack className="info">
-                                    <Stack flexDirection={"row"}>
+                                    <Stack className="name-price" flexDirection={"row"}>
                                         <Typography className={"title"}>
                                             {product.productName}
                                         </Typography>
